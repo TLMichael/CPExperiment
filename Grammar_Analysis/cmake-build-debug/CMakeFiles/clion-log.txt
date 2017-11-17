@@ -1,0 +1,4 @@
+/home/michael/下载/clion-2017.2.3/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/cmake-build-debug
