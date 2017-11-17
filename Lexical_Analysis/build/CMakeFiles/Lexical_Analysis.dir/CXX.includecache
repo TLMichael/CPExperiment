@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/michael/文档/C++Projects/CPExperiment/Lexical_Analysis/LA.cpp
+LA.h
+/home/michael/文档/C++Projects/CPExperiment/Lexical_Analysis/LA.h
+
+/home/michael/文档/C++Projects/CPExperiment/Lexical_Analysis/LA.h
+iostream
+-
+fstream
+-
+ctime
+-
+
