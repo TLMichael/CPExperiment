@@ -1,4 +1,5 @@
 /**
+ * @lalalal
  * @author TripleZ
  * @date 2017-09-19
  * @brief A simple lexical analysis program written by c++.
