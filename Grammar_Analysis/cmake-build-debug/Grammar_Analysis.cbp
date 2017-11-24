@@ -84,10 +84,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/GA.cpp">
+			<Option target="Grammar_Analysis"/>
+		</Unit>
+		<Unit filename="/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/GA.h">
+			<Option target="Grammar_Analysis"/>
+		</Unit>
 		<Unit filename="/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/LA.cpp">
 			<Option target="Grammar_Analysis"/>
 		</Unit>
 		<Unit filename="/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/LA.h">
+			<Option target="Grammar_Analysis"/>
+		</Unit>
+		<Unit filename="/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/main.cpp">
 			<Option target="Grammar_Analysis"/>
 		</Unit>
 		<Unit filename="/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/CMakeLists.txt">

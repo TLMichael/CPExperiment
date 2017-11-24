@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/michael/下载/clion-2017.2.3/bin/cmake/bin/cmake
+CMAKE_COMMAND = /usr/local/clion-2017.2.3/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /home/michael/下载/clion-2017.2.3/bin/cmake/bin/cmake -E remove -f
+RM = /usr/local/clion-2017.2.3/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -81,17 +81,69 @@ CMakeFiles/Grammar_Analysis.dir/LA.cpp.o.provides: CMakeFiles/Grammar_Analysis.d
 CMakeFiles/Grammar_Analysis.dir/LA.cpp.o.provides.build: CMakeFiles/Grammar_Analysis.dir/LA.cpp.o
 
 
+CMakeFiles/Grammar_Analysis.dir/GA.cpp.o: CMakeFiles/Grammar_Analysis.dir/flags.make
+CMakeFiles/Grammar_Analysis.dir/GA.cpp.o: ../GA.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Grammar_Analysis.dir/GA.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Grammar_Analysis.dir/GA.cpp.o -c /home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/GA.cpp
+
+CMakeFiles/Grammar_Analysis.dir/GA.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Grammar_Analysis.dir/GA.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/GA.cpp > CMakeFiles/Grammar_Analysis.dir/GA.cpp.i
+
+CMakeFiles/Grammar_Analysis.dir/GA.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Grammar_Analysis.dir/GA.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/GA.cpp -o CMakeFiles/Grammar_Analysis.dir/GA.cpp.s
+
+CMakeFiles/Grammar_Analysis.dir/GA.cpp.o.requires:
+
+.PHONY : CMakeFiles/Grammar_Analysis.dir/GA.cpp.o.requires
+
+CMakeFiles/Grammar_Analysis.dir/GA.cpp.o.provides: CMakeFiles/Grammar_Analysis.dir/GA.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Grammar_Analysis.dir/build.make CMakeFiles/Grammar_Analysis.dir/GA.cpp.o.provides.build
+.PHONY : CMakeFiles/Grammar_Analysis.dir/GA.cpp.o.provides
+
+CMakeFiles/Grammar_Analysis.dir/GA.cpp.o.provides.build: CMakeFiles/Grammar_Analysis.dir/GA.cpp.o
+
+
+CMakeFiles/Grammar_Analysis.dir/main.cpp.o: CMakeFiles/Grammar_Analysis.dir/flags.make
+CMakeFiles/Grammar_Analysis.dir/main.cpp.o: ../main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Grammar_Analysis.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Grammar_Analysis.dir/main.cpp.o -c /home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/main.cpp
+
+CMakeFiles/Grammar_Analysis.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Grammar_Analysis.dir/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/main.cpp > CMakeFiles/Grammar_Analysis.dir/main.cpp.i
+
+CMakeFiles/Grammar_Analysis.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Grammar_Analysis.dir/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/main.cpp -o CMakeFiles/Grammar_Analysis.dir/main.cpp.s
+
+CMakeFiles/Grammar_Analysis.dir/main.cpp.o.requires:
+
+.PHONY : CMakeFiles/Grammar_Analysis.dir/main.cpp.o.requires
+
+CMakeFiles/Grammar_Analysis.dir/main.cpp.o.provides: CMakeFiles/Grammar_Analysis.dir/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Grammar_Analysis.dir/build.make CMakeFiles/Grammar_Analysis.dir/main.cpp.o.provides.build
+.PHONY : CMakeFiles/Grammar_Analysis.dir/main.cpp.o.provides
+
+CMakeFiles/Grammar_Analysis.dir/main.cpp.o.provides.build: CMakeFiles/Grammar_Analysis.dir/main.cpp.o
+
+
 # Object files for target Grammar_Analysis
 Grammar_Analysis_OBJECTS = \
-"CMakeFiles/Grammar_Analysis.dir/LA.cpp.o"
+"CMakeFiles/Grammar_Analysis.dir/LA.cpp.o" \
+"CMakeFiles/Grammar_Analysis.dir/GA.cpp.o" \
+"CMakeFiles/Grammar_Analysis.dir/main.cpp.o"
 
 # External object files for target Grammar_Analysis
 Grammar_Analysis_EXTERNAL_OBJECTS =
 
 Grammar_Analysis: CMakeFiles/Grammar_Analysis.dir/LA.cpp.o
+Grammar_Analysis: CMakeFiles/Grammar_Analysis.dir/GA.cpp.o
+Grammar_Analysis: CMakeFiles/Grammar_Analysis.dir/main.cpp.o
 Grammar_Analysis: CMakeFiles/Grammar_Analysis.dir/build.make
 Grammar_Analysis: CMakeFiles/Grammar_Analysis.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Grammar_Analysis"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Grammar_Analysis"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Grammar_Analysis.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -100,6 +152,8 @@ CMakeFiles/Grammar_Analysis.dir/build: Grammar_Analysis
 .PHONY : CMakeFiles/Grammar_Analysis.dir/build
 
 CMakeFiles/Grammar_Analysis.dir/requires: CMakeFiles/Grammar_Analysis.dir/LA.cpp.o.requires
+CMakeFiles/Grammar_Analysis.dir/requires: CMakeFiles/Grammar_Analysis.dir/GA.cpp.o.requires
+CMakeFiles/Grammar_Analysis.dir/requires: CMakeFiles/Grammar_Analysis.dir/main.cpp.o.requires
 
 .PHONY : CMakeFiles/Grammar_Analysis.dir/requires
 

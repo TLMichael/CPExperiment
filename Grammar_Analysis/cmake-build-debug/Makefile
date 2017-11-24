@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/michael/下载/clion-2017.2.3/bin/cmake/bin/cmake
+CMAKE_COMMAND = /usr/local/clion-2017.2.3/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /home/michael/下载/clion-2017.2.3/bin/cmake/bin/cmake -E remove -f
+RM = /usr/local/clion-2017.2.3/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/michael/文档/C++Projects/CPExperiment/Grammar_Analysi
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/michael/下载/clion-2017.2.3/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/clion-2017.2.3/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/michael/下载/clion-2017.2.3/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/usr/local/clion-2017.2.3/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -123,6 +123,33 @@ Grammar_Analysis/fast:
 	$(MAKE) -f CMakeFiles/Grammar_Analysis.dir/build.make CMakeFiles/Grammar_Analysis.dir/build
 .PHONY : Grammar_Analysis/fast
 
+GA.o: GA.cpp.o
+
+.PHONY : GA.o
+
+# target to build an object file
+GA.cpp.o:
+	$(MAKE) -f CMakeFiles/Grammar_Analysis.dir/build.make CMakeFiles/Grammar_Analysis.dir/GA.cpp.o
+.PHONY : GA.cpp.o
+
+GA.i: GA.cpp.i
+
+.PHONY : GA.i
+
+# target to preprocess a source file
+GA.cpp.i:
+	$(MAKE) -f CMakeFiles/Grammar_Analysis.dir/build.make CMakeFiles/Grammar_Analysis.dir/GA.cpp.i
+.PHONY : GA.cpp.i
+
+GA.s: GA.cpp.s
+
+.PHONY : GA.s
+
+# target to generate assembly for a file
+GA.cpp.s:
+	$(MAKE) -f CMakeFiles/Grammar_Analysis.dir/build.make CMakeFiles/Grammar_Analysis.dir/GA.cpp.s
+.PHONY : GA.cpp.s
+
 LA.o: LA.cpp.o
 
 .PHONY : LA.o
@@ -150,6 +177,33 @@ LA.cpp.s:
 	$(MAKE) -f CMakeFiles/Grammar_Analysis.dir/build.make CMakeFiles/Grammar_Analysis.dir/LA.cpp.s
 .PHONY : LA.cpp.s
 
+main.o: main.cpp.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/Grammar_Analysis.dir/build.make CMakeFiles/Grammar_Analysis.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/Grammar_Analysis.dir/build.make CMakeFiles/Grammar_Analysis.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/Grammar_Analysis.dir/build.make CMakeFiles/Grammar_Analysis.dir/main.cpp.s
+.PHONY : main.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Grammar_Analysis"
+	@echo "... GA.o"
+	@echo "... GA.i"
+	@echo "... GA.s"
 	@echo "... LA.o"
 	@echo "... LA.i"
 	@echo "... LA.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

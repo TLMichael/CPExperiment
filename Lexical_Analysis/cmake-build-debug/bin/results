@@ -1,4 +1,4 @@
-Generate Time: Fri Nov 17 22:53:24 2017
+Generate Time: Fri Nov 24 20:33:13 2017
 Program File Name: input
 Language Set: PL/0
 
@@ -43,7 +43,7 @@ q, ID
 :=, AOP
 m, ID
 +, OOP
-[Program ERROR] [16,23] Invalid ID: "1m12"
+[Program ERROR] [15,23] Invalid ID: "1m12"
 ;, EOP
 q, ID
 :=, AOP
@@ -116,7 +116,7 @@ m, ID
 ), SOP
 ;, EOP
 r, ID
-[Program ERROR] [36,15] Missing "=" near the ":" ;
+[Program ERROR] [35,15] Missing "=" near the ":" ;
 m, ID
 ;, EOP
 end, RESERVED

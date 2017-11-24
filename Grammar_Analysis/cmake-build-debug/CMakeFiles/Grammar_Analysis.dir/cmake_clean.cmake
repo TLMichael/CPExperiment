@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Grammar_Analysis.dir/LA.cpp.o"
+  "CMakeFiles/Grammar_Analysis.dir/GA.cpp.o"
+  "CMakeFiles/Grammar_Analysis.dir/main.cpp.o"
   "Grammar_Analysis.pdb"
   "Grammar_Analysis"
 )

@@ -10,16 +10,15 @@ var m, n, r, q;
 
 procedure gcd;  
 	begin  
-		while r<>0 
-		do  
-			begin  
-				q:=m+1m12;
-				q := m / n;  
-				r := m - q * n;  
-				m := n;  
-				n := r;  
-			end;  
+		while r<>0 do  
+		begin  
+			q := m + 1m12;
+			q := m / n;  
+			r := m - q * n;  
+			m := n;  
+			n := r;  
 		end;  
+	end;  
 	begin  
 		read(m);  
 		read(n);  
@@ -34,6 +33,6 @@ procedure gcd;
 			call gcd;  
 			write(m); 
 			r:m; 
-			end;  
-end
+		end;  
+	end
 
