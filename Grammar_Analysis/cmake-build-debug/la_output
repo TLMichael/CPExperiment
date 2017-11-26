@@ -1,0 +1,73 @@
+# Lexical Analysis Result
+# Generate Time: Sun Nov 26 16:52:15 2017
+# Program File Name: input
+# Language Set: PL/0
+
+program RESERVED 1 8
+ttt ID 1 12
+; EOP 1 13
+const RESERVED 2 10
+er ID 2 13
+^ := AOP 2 14
+[Lexical ERROR]  [2,14] Missing "=" near the ":"
+3 INT 2 15
+^ 55te ID 2 20
+[Lexical ERROR]  [2,20] Invalid ID: "55te"
+:= AOP 2 22
+3 INT 2 23
+tt ID 2 26
+:= AOP 2 28
+3 INT 2 29
+; EOP 2 30
+var RESERVED 3 8
+tt ID 3 11
+dsf ID 3 15
+; EOP 3 16
+procedure RESERVED 4 14
+( SOP 4 16
+ttt ID 4 19
+, SOP 4 20
+eee ID 4 24
+const RESERVED 5 10
+tt ID 5 13
+:= AOP 5 15
+34 INT 5 18
+; EOP 5 19
+begin RESERVED 6 10
+while RESERVED 7 14
+c ID 7 16
+>= COP 7 18
+d ID 7 19
+c ID 7 22
+:= AOP 7 24
+c ID 7 25
+- OOP 7 26
+1 INT 7 27
+end RESERVED 8 8
+begin RESERVED 9 6
+read RESERVED 10 9
+test ID 10 14
+) SOP 10 15
+; EOP 10 16
+if RESERVED 11 7
+a ID 11 9
+> COP 11 10
+b ID 11 11
+then RESERVED 11 16
+a ID 11 18
+:= AOP 11 20
+3 INT 11 21
+; EOP 11 22
+aaa ID 12 8
+:= AOP 12 10
+26 INT 12 12
+; EOP 12 13
+write RESERVED 13 10
+( SOP 13 12
+a ID 13 13
++ OOP 13 14
+b ID 13 15
+) SOP 13 16
+; EOP 13 17
+end RESERVED 14 4
+ÿ UNKNOWN 15 2

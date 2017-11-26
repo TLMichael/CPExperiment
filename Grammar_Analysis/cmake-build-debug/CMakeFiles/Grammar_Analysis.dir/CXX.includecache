@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/GA.cpp
+GA.h
+/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/GA.h
+
+/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/GA.h
+iostream
+-
+ctime
+-
+fstream
+-
+string
+-
+sstream
+-
+
+/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/LA.cpp
+LA.h
+/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/LA.h
+
+/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/LA.h
+iostream
+-
+ctime
+-
+fstream
+-
+
+/home/michael/文档/C++Projects/CPExperiment/Grammar_Analysis/main.cpp
+
