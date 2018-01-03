@@ -29,4 +29,6 @@ void Unit::print() {
     std::cout << "-----------------" << std::endl;
 }
 
+int GA();
+
 #endif //GRAMMAR_ANALYSIS_GA_H

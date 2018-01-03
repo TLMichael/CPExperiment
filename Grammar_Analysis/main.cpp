@@ -1,9 +1,8 @@
 //
 // Created by michael on 17-11-24.
 //
-
-int LA();
-int GA();
+#include "LA.h"
+#include "GA.h"
 
 int main()
 {
