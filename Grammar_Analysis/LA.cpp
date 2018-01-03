@@ -35,7 +35,7 @@ bool isLetter(char ch)
 int Reserve(string strToken)
 {
     int i;
-    for(i = 1; i <= 13; i++)
+    for(i = 1; i <= 14; i++)
     {
         if(strToken == key[i])
             return i;
@@ -64,7 +64,7 @@ int LA()
     fstream source;
     fstream output;
     source.open(infileName, ios::in);
-    output.open("results", ios::out | ios::trunc);
+    output.open("la_output", ios::out | ios::trunc);
 
     line = 1;
     column = 1;
@@ -85,8 +85,8 @@ int LA()
     time(&rawtime);
     timeinfo = localtime(&rawtime);
 
-    output << "生成时间：" << asctime(timeinfo);
-    output << "源文件：" << infileName << endl << endl;
+    output << "#生成时间：" << asctime(timeinfo);
+    output << "#源文件：" << infileName << endl << endl;
 
     string strToken;
     char ch;
@@ -110,11 +110,11 @@ int LA()
 
             if(Reserve(strToken))
             {
-                output << strToken << ", RESERVED" << endl;
+                output << strToken << " RESERVED" << " " << line << " " << column << endl;
             }
             else
             {
-                output << strToken << ", ID" << endl;
+                output << strToken << " ID" << " " << line << " " << column << endl;
             }
 
             strToken = "";
@@ -131,7 +131,7 @@ int LA()
             if(isLetter(ch))
             {
                 cout << "[Program ERROR][" << line << ", " << column << "] " << "Invalid ID: ";
-                output << "[Program ERROR][" << line << ", " << column << "] " << "Invalid ID: ";
+                //output << "[Program ERROR][" << line << ", " << column << "] " << "Invalid ID: ";
                 while(isLetter(ch) || isDigit(ch))
                 {
                     Concat(strToken, ch);
@@ -139,11 +139,13 @@ int LA()
                     source.get(ch);
                 }
                 cout << strToken << endl;
+                output << "^ " << strToken << " ID" << " " << line << " " << column << endl;
+                output << "[Program ERROR][" << line << ", " << column << "] " << "Invalid ID: ";
                 output << strToken << endl;
             }
             else
             {
-                output << strToken << ", INT" << endl;
+                output << strToken << " INT" << " " << line << " " << column << endl;
             }
             Retract(source);
             strToken = "";
@@ -151,7 +153,7 @@ int LA()
         else if(ch == '=')
         {
             column++;
-            output << ch << ", COP" << endl;
+            output << ch << " COP" << " " << line << " " << column << endl;
         }
         else if(ch == '<')
         {
@@ -160,16 +162,16 @@ int LA()
             if(ch == '>')
             {
                 column++;
-                output << "<>, COP" << endl;
+                output << "<> COP" << " " << line << " " << column << endl;
             }
             else if(ch == '=')
             {
                 column++;
-                output << "<=, COP" << endl;
+                output << "<= COP" << " " << line << " " << column << endl;
             }
             else
             {
-                output << "<, COP" << endl;
+                output << "< COP" << " " << line << " " << column << endl;
                 Retract(source);
             }
         }
@@ -180,11 +182,11 @@ int LA()
             if(ch == '=')
             {
                 column++;
-                output << ">=, COP" << endl;
+                output << ">= COP" << " " << line << " " << column << endl;
             }
             else
             {
-                output << ">, COP" << endl;
+                output << "> COP" << " " << line << " " << column << endl;
                 Retract(source);
             }
         }
@@ -195,11 +197,12 @@ int LA()
             if(ch == '=')
             {
                 column++;
-                output << ":=, AOP" << endl;
+                output << ":= AOP" << " " << line << " " << column << endl;
             }
             else
             {
                 cout << "[Program ERROR]" << " [" << line << "," << column <<"] " << "Missing '=' near the ':' ;" << endl;
+                output << "^ := AOP" << " " << line << " " << column << endl;
                 output << "[Program ERROR]" << " [" << line << "," << column <<"] " << "Missing '=' near the ':' ;" << endl;
                 Retract(source);
             }
@@ -207,47 +210,47 @@ int LA()
         else if(ch == '+')
         {
             column++;
-            output << ch << ", OOP" << endl;
+            output << ch << " OOP" << " " << line << " " << column << endl;
         }
         else if(ch == '-')
         {
             column++;
-            output << ch << ", OOP" << endl;
+            output << ch << " OOP" << " " << line << " " << column << endl;
         }
         else if(ch == '*')
         {
             column++;
-            output << ch << ", OOP" << endl;
+            output << ch << " OOP" << " " << line << " " << column << endl;
         }
         else if(ch == '/')
         {
             column++;
-            output << ch << ", OOP" << endl;
+            output << ch << " OOP" << " " << line << " " << column << endl;
         }
         else if(ch == ';')
         {
             column++;
-            output << ch << ", EOP" << endl;
+            output << ch << " EOP" << " " << line << " " << column << endl;
         }
         else if(ch == '(')
         {
             column++;
-            output << ch << ", SOP" << endl;
+            output << ch << " SOP" << " " << line << " " << column << endl;
         }
         else if(ch == ')')
         {
             column++;
-            output << ch << ", SOP" << endl;
+            output << ch << " SOP" << " " << line << " " << column << endl;
         }
         else if(ch == ',')
         {
             column++;
-            output << ch << ", SOP" << endl;
+            output << ch << " SOP" << " " << line << " " << column << endl;
         }
         else
         {
             column++;
-            output << ch << ", UNKNOWN" << endl;
+            output << ch << " UNKNOWN" << " " << line << " " << column << endl;
         }
 
     }
@@ -255,7 +258,7 @@ int LA()
     source.close();
     output.close();
     cout << endl;
-    cout << "词法分析成功完成，结果已存入results文件中。" << endl;
+    cout << "词法分析成功完成，结果已存入la_output文件中。" << endl;
 
     return 0;
 }

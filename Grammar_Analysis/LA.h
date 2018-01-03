@@ -6,11 +6,10 @@ using namespace std;
 /**
  * ±£Áô×Ö±í
  */
-const string key[14] = {"", "program", "const", "var", "procedure", "begin",
-                        "if", "then", "while", "call", "read", "write", "end", "do"};
+const string key[15] = {"", "program", "const", "var", "procedure", "begin",
+                        "if", "then", "while", "call", "read", "write", "end", "do", "odd"};
 int line;
 int column;
-
 /**
  * ÅÐ¶Ï×Ö·ûÊÇ·ñÎª¿Õ°××Ö·û
  * @param ch

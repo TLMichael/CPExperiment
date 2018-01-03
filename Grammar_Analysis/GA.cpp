@@ -1,68 +1,49 @@
+//
+// Created by michael on 18-1-3.
+//
+
 #include "GA.h"
 using namespace std;
 
-Unit unit, former_unit;
-int errorStack[100] = {-1};
-int *errorType = errorStack;
-bool error = false;
-fstream gaSource;
-fstream gaOutput;
-
-
-/**
- * Read file line by line.
- * @return Global variables: unit.value & unit.key.
- */
-string line;
-string::iterator itLine;
-
-void ReadLine() {
-// Remember ERROR procedure.
-    if (getline(gaSource, line)){
-//    cout << line << endl;
-
+void ReadLine()
+{
+    if(getline(gaSource, line))
+    {
         itLine = line.begin();
-        while (*itLine == '#' || line.empty()) {// Jump annotations & empty lines
+        while (*itLine == '#' || line.empty())
+        {
             getline(gaSource, line);
-//        cout << line << endl;
             itLine = line.begin();
         }
-
         former_unit = unit;
-
         istringstream iss(line);
-
-        if (*itLine == '^'){ // Lexical error
+        if(*itLine == '^')
+        {
             char ch;
-            iss >> ch; // '^'
+            iss >> ch;
             iss >> unit.value;
             iss >> unit.key;
             iss >> unit.line;
             iss >> unit.column;
-//        unit.print();
             getline(gaSource, line);
-        } else { // No lexical error
+        }
+        else
+        {
             iss >> unit.value;
             iss >> unit.key;
             iss >> unit.line;
             iss >> unit.column;
-//        unit.print();
         }
-    } else {
-//        cout << "[DEBUG] End of file" << endl;
     }
 }
 
-/**
- * Throw an error.
- * @param type Error type.
- */
-void ThrowError(int type){
+void ThrowError(int type)
+{
     error = true;
     *errorType = type;
     errorType++;
-//    cout << endl << "[DEBUG] ERROR TYPE: " << type << endl;
-    switch(type){
+    switch (type)
+    {
         case 0:
             cout << "[Grammar ERROR] " << " [" << unit.line << "," << unit.column << "] " << "Spell error \"program\"" << endl;
             break;
@@ -139,13 +120,13 @@ void ThrowError(int type){
             cout << "[Grammar ERROR] "<< " [" << unit.line << "," << unit.column << "] " <<"Wrong factor" << endl;
             break;
         case 25:
-            cout << "[Grammar ERROR] "<< " [" << former_unit.line << "," << former_unit.column << "] " << "Extra semicolon \";\" before \"end\"" << endl;
+            cout << "[Grammar ERROR] "<< " [" << former_unit.line << "," << former_unit.column << "] " << "Extra semicolon ';' before 'end'" << endl;
             break;
         case 26:
-            cout << "[Grammar ERROR] "<< " [" << former_unit.line << "," << former_unit.column << "] " << "Missing comma \",\" in \"var\"" << endl;
+            cout << "[Grammar ERROR] "<< " [" << former_unit.line << "," << former_unit.column << "] " << "Missing comma ',' in 'var'" << endl;
             break;
         case 27:
-            cout << "[Grammar ERROR] "<< " [" << former_unit.line << "," << former_unit.column << "] " << "Missing comma \",\" in \"const\"" << endl;
+            cout << "[Grammar ERROR] "<< " [" << former_unit.line << "," << former_unit.column << "] " << "Missing comma ',' in 'const'" << endl;
             break;
         default:
             cout << "[Grammar ERROR] "<< " [" << unit.line << "," << unit.column << "] " <<"Unknown error" << endl;
@@ -153,256 +134,314 @@ void ThrowError(int type){
     }
 }
 
-void Exp();
-/**
- * <factor>→<id>|<integer>|(<exp>)
- */
-void Factor() {
-    if (unit.key == "ID" || *errorType == 24) {
-        if (unit.key != "ID" && unit.key != "INT" && unit.value == "(" && *errorType == 24) errorType++;
+void Factor()
+{
+    if(unit.key == "ID" || *errorType == 24)
+    {
+        if(unit.key != "ID" && unit.key != "INT" && unit.value == "(" && *errorType == 24)
+            errorType++;
         ReadLine();
-        // End factor
-    } else if (unit.key == "INT") {
+    }
+    else if(unit.key == "INT")
+    {
         ReadLine();
-        // End factor
-    } else if (unit.key == "SOP" && unit.value == "(") {
+    }
+    else if(unit.key == "SOP" && unit.value == "(")
+    {
         ReadLine();
         Exp();
-        if (unit.key == "SOP" && unit.value == ")" || *errorType == 23) {
-            if (unit.value != ")" && *errorType == 23) errorType++;
+        if(unit.key == "SOP" && unit.value == ")" || *errorType == 23)
+        {
+            if(unit.value != ")" && *errorType == 23)
+                errorType++;
             ReadLine();
-            // End factor
-        } else {
+        }
+        else
+        {
             ThrowError(23);
         }
-    } else {
+    }
+    else
+    {
         ThrowError(24);
     }
 }
 
-/**
- * <term> → <factor>{<mop><factor>}
- */
-void Term() {
+void Term()
+{
     Factor();
-    if (unit.value == "*" || unit.value == "/") {
+    if(unit.value == "*" || unit.value == "/")
+    {
         ReadLine();
         Factor();
     }
 }
 
-/**
- * <exp> → [+|-]<term>{<aop><term>}
- */
-void Exp() {
-    if (unit.value == "+" || unit.value == "-") {
+void Exp()
+{
+    if(unit.value == "+" || unit.value == "-")
         ReadLine();
-    }
     Term();
-    if (unit.value == "+" || unit.value == "-") {
+    if(unit.value == "+" || unit.value == "-")
+    {
         ReadLine();
         Term();
     }
 }
 
-/**
- * <lexp> → <exp> <lop> <exp>|odd <exp>
- */
-void Lexp() {
-    if (unit.value == "odd") {
+void Lexp()
+{
+    if(unit.value == "odd")
+    {
         ReadLine();
         Exp();
-    } else {
+    }
+    else
+    {
         Exp();
-//        ReadLine();
-        if (unit.key == "COP" || *errorType == 22) {
-            if (unit.key != "COP" && *errorType == 22) errorType++;
+        if(unit.key == "COP" || *errorType == 22)
+        {
+            if(unit.key != "COP" && *errorType == 22)
+                errorType++;
             ReadLine();
             Exp();
-        } else {
+        }
+        else
+        {
             ThrowError(22);
         }
     }
-
 }
 
-
-void Body();
-/**
- * <statement> → <id> := <exp>
-               |if <lexp> then <statement>[else <statement>]
-               |while <lexp> do <statement>
-               |call <id>[（<exp>{,<exp>}）]
-               |<body>
-               |read (<id>{，<id>})
-               |write (<exp>{,<exp>})
- */
-void Statement() {
-    if (unit.key == "RESERVED" && unit.value == "if") {
+void Statement()
+{
+    if(unit.key == "RESERVED" && unit.value == "if")
+    {
         ReadLine();
         Lexp();
-        if (unit.key == "RESERVED" && unit.value == "then" || *errorType == 15) {
-            if (*errorType == 15 && unit.value != "then") errorType++; else ReadLine();
+        if(unit.key == "RESERVED" && unit.value == "then" || *errorType == 15)
+        {
+            if(*errorType == 15 && unit.value != "then")
+                errorType++;
+            else
+                ReadLine();
             Statement();
-//            ReadLine();
-            if (unit.key == "RESERVED" && unit.value == "else") {
+            if(unit.key == "RESERVED" && unit.value == "else")
+            {
                 ReadLine();
                 Statement();
-//                ReadLine();
             }
-        } else {
-            ThrowError(15);
         }
-
-    } else if (unit.key == "RESERVED" && unit.value == "while") {
-        ReadLine();
-        Lexp();
-        if (unit.key == "RESERVED" && unit.value == "do" || *errorType == 16) {
-            if (*errorType == 16 && unit.value != "do") errorType++; else ReadLine();
-//            ReadLine();
-            Statement();
-//            ReadLine();
-        } else {
+        else
+        {
             ThrowError(16);
         }
-
-    } else if (unit.key == "RESERVED" && unit.value == "call") {
+    }
+    else if(unit.key == "RESERVED" && unit.value == "while")
+    {
         ReadLine();
-        if (unit.key == "ID" || *errorType == 17) {
-            if (*errorType == 17 && unit.key != "ID") errorType++;
-            ReadLine();// Read more one line...
-            if (unit.key == "SOP" && unit.value == "(") {
+        Lexp();
+        if(unit.key == "RESERVED" && unit.value == "do" || *errorType == 16)
+        {
+            if(*errorType == 16 && unit.value != "do")
+                errorType++;
+            else
+                ReadLine();
+            Statement();
+        }
+        else
+        {
+            ThrowError(16);
+        }
+    }
+    else if(unit.key == "RESERVED" && unit.value == "call")
+    {
+        ReadLine();
+        if(unit.key == "ID" || *errorType == 17)
+        {
+            if(*errorType == 17 && unit.key != "ID")
+                errorType++;
+            ReadLine();
+            if(unit.key == "SOP" && unit.value == "(")
+            {
                 ReadLine();
                 Exp();
-//                ReadLine();
-                while (unit.key == "SOP" && unit.value == ",") {
+                while (unit.key == "SOP" && unit.value == ",")
+                {
                     ReadLine();
                     Exp();
-//                    ReadLine();
                 }
-                if (unit.value == ",") ReadLine();
-                if (unit.key == "SOP" && unit.value == ")" || *errorType == 18) {
-                    if (*errorType == 18 && unit.value != ")") errorType++; else ReadLine();
-//                    ReadLine();
-                } else {
+                if(unit.value == ",")
+                    ReadLine();
+                if(unit.key == "SOP" && unit.value == ")" || *errorType == 18)
+                {
+                    if(*errorType == 18 && unit.value != ")")
+                        errorType++;
+                    else
+                        ReadLine();
+                }
+                else
+                {
                     ThrowError(18);
                 }
             }
-        } else {
+        }
+        else
+        {
             ThrowError(17);
         }
-
-    } else if (unit.key == "RESERVED" && unit.value == "read") {
-        // read (<id>{，<id>})
+    }
+    else if(unit.key == "RESERVED" && unit.value == "read")
+    {
         ReadLine();
-        if (unit.key == "SOP" && unit.value == "(" || *errorType == 20) {
-            if (*errorType == 20 && unit.value != "(") errorType++; else ReadLine();
-//            ReadLine();
-            if (unit.key == "ID" || *errorType == 19) {
-                if (*errorType == 19 && unit.key != "ID") errorType++; else ReadLine();
-//                ReadLine();
-                while (unit.key == "SOP" && unit.value == ",") {
+        if(unit.key == "SOP" && unit.value == "(" || *errorType == 20)
+        {
+            if(*errorType == 20 && unit.value != "(")
+                errorType++;
+            else
+                ReadLine();
+            if(unit.key == "ID" || *errorType == 19)
+            {
+                if(*errorType == 19 && unit.key != "ID")
+                    errorType++;
+                else
                     ReadLine();
-                    if (unit.key == "ID" || *errorType == 19) {
-                        if (*errorType == 19 && unit.key != "ID") errorType++; else ReadLine();
-//                        ReadLine();
-                    } else {
+                while (unit.key == "SOP" && unit.value == ",")
+                {
+                    ReadLine();
+                    if(unit.key == "ID" || *errorType == 19)
+                    {
+                        if (*errorType == 19 && unit.key != "ID")
+                            errorType++;
+                        else
+                            ReadLine();
+                    }
+                    else
+                    {
                         ThrowError(19);
                     }
                 }
-                if (unit.value == ",") ReadLine();
-                if (unit.key == "SOP" && unit.value == ")" || *errorType == 20) {
-                    if (*errorType == 20 && unit.value != ")") errorType++; else ReadLine();
-                    // Over read...
-                } else {
+                if(unit.value == ",")
+                    ReadLine();
+                if(unit.key == "SOP" && unit.value == ")" || *errorType == 20)
+                {
+                    if(*errorType == 20 && unit.value != ")")
+                        errorType++;
+                    else
+                        ReadLine();
+                }
+                else
+                {
                     ThrowError(20);
                 }
-            } else {
+            }
+            else
+            {
                 ThrowError(19);
             }
-
-        } else {
+        }
+        else
+        {
             ThrowError(20);
         }
-
-    } else if (unit.key == "RESERVED" && unit.value == "write") {
-        // write (<exp>{,<exp>})
-
+    }
+    else if(unit.key == "RESERVED" && unit.value == "write")
+    {
         ReadLine();
-        if (unit.key == "SOP" && unit.value == "(" || *errorType == 21) {
-            if (*errorType == 21 && unit.value != "(") errorType++; else ReadLine();
-//            ReadLine();
+        if(unit.key == "SOP" && unit.value == "(" || *errorType == 21)
+        {
+            if(*errorType == 21 && unit.value != "(")
+                errorType++;
+            else
+                ReadLine();
             Exp();
-            while (unit.key == "SOP" && unit.value == ",") {
+            while (unit.key == "SOP" && unit.value == ",")
+            {
                 ReadLine();
                 Exp();
             }
-//            if (unit.value == ",") ReadLine();
-            if (unit.key == "SOP" && unit.value == ")" || *errorType == 21) {
-                if (*errorType == 21 && unit.value != ")") errorType++; else ReadLine();
-//                ReadLine();
-                // Over write...
-            } else {
+            if(unit.key == "SOP" && unit.value == ")" || *errorType == 21)
+            {
+                if(*errorType == 21 && unit.value != ")")
+                    errorType++;
+                else
+                    ReadLine();
+            }
+            else
+            {
                 ThrowError(21);
             }
-        } else {
+        }
+        else
+        {
             ThrowError(21);
         }
-
-    } else if (unit.key == "ID") {
-        // <id> := <exp>
+    }
+    else if(unit.key == "ID")
+    {
         ReadLine();
-        if (unit.key == "AOP" && unit.value == ":=" || *errorType == 4) {
-            if (*errorType == 4 && unit.value != ":=" ) errorType++;
+        if(unit.key == "AOP" && unit.value == ":=" || *errorType == 4)
+        {
+            if(*errorType == 4 && unit.value != ":=")
+                errorType++;
             ReadLine();
             Exp();
-        } else {
+        }
+        else
+        {
             ThrowError(4);
         }
-    } else{
+    }
+    else
+    {
         Body();
     }
 }
 
-/**
- * <body> → begin <statement>{;<statement>}end
- */
-void Body() {
-    if (unit.key == "RESERVED" && unit.value == "begin" || *errorType == 12) {
-        if (*errorType == 12 && unit.value != "begin") errorType++;
+void Body()
+{
+    if (unit.key == "RESERVED" && unit.value == "begin" || *errorType == 12)
+    {
+        if (*errorType == 12 && unit.value != "begin")
+            errorType++;
         ReadLine();
         Statement();
-        while (unit.key == "EOP" && unit.value == ";" && !error) {
+        while (unit.key == "EOP" && unit.value == ";" && !error)
+        {
             ReadLine();
-            if (unit.value == "end") {
-                if (*errorType != 25) ThrowError(25);
+            if (unit.value == "end")
+            {
+                if (*errorType != 25)
+                    ThrowError(25);
                 break;
             }
             Statement();
         }
-//        if (unit.value == ";") ReadLine();
-        if(*errorType == 25) {
+        if(*errorType == 25)
+        {
             errorType++;
             ReadLine();
         }
-        if (unit.key == "RESERVED" && unit.value == "end" || *errorType == 13 || error) {
-            if (*errorType == 13 && unit.value != "end") errorType++;
-            if (!error) ReadLine();
-            // Over
-        } else {
+        if (unit.key == "RESERVED" && unit.value == "end" || *errorType == 13 || error)
+        {
+            if (*errorType == 13 && unit.value != "end")
+                errorType++;
+            if (!error)
+                ReadLine();
+        }
+        else
+        {
             ThrowError(13);
         }
-    } else {
+    }
+    else
+    {
         ThrowError(12);
     }
-
 }
 
-void Block();
-/**
- * <proc> → procedure <id>（<id>{,<id>}）;<block>{;<proc>}
- */
-void Proc() {
+void Proc()
+{
     if(unit.key == "ID" || *errorType == 9) {
         if(*errorType == 9 && unit.key != "ID") errorType++; else ReadLine();
 //        ReadLine();
@@ -460,12 +499,8 @@ void Proc() {
     }
 }
 
-/**
- * <vardecl> → var <id>{,<id>};
- * <id> → l{l|d}
- * l represent letter.
- */
-void Vardecl() {
+void Vardecl()
+{
     if (unit.key == "ID") {
         ReadLine();
         while (unit.value == "," && unit.key == "SOP" || *errorType == 26) {
@@ -492,13 +527,7 @@ void Vardecl() {
     }
 }
 
-/**
- * Const variables declaration.
- * <condecl> → const <const>{,<const>};
- * <const> → <id>:=<integer>
- * <id> → l{l|d}
- * l represent letter.
- */
+
 void Condecl() {
     if (unit.key == "ID" || *errorType == 3){
         if(unit.key != "ID") errorType++;
@@ -571,9 +600,6 @@ void Condecl() {
     }
 }
 
-/**
- * <block> → [<condecl>][<vardecl>][<proc>]<body>
- */
 void Block() {
     if (unit.value == "const" && unit.key == "RESERVED" && !error) {
         ReadLine();
@@ -631,9 +657,6 @@ void Block() {
     }
 }
 
-/**
- * <prog> → program <id>; <block>
- */
 void Prog() {
     ReadLine();
     if ((unit.value == "program" && unit.key == "RESERVED") || *errorType == 0){
@@ -657,9 +680,6 @@ void Prog() {
 
 }
 
-/**
- * Open IO files.
- */
 void OpenFile() {
     gaSource.open("la_output", ios::in); // Read file
     gaOutput.open("ga_output", ios::out | ios::trunc); // Write file
@@ -686,17 +706,11 @@ void OpenFile() {
     }
 }
 
-/**
- * Close IO files.
- */
 void CloseFile() {
     gaSource.close();
     gaOutput.close();
 }
 
-/**
- * Print the error stack out.
- */
 void PrintErrorStack() {
     cout << "[DEBUG] Error Stack" << endl;
     cout << endl << "|<<<< ERROR STACK <<<<<" << endl;
@@ -707,10 +721,7 @@ void PrintErrorStack() {
     }
     cout << endl << "|<<<<<<<<<<<<<<<<<<<<<<" << endl;
 }
-/**
- * Grammar analysis main program
- * @return
- */
+
 int GA() {
 
     OpenFile();
@@ -727,3 +738,4 @@ int GA() {
 //    PrintErrorStack();
     return 0;
 }
+

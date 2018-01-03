@@ -1,7 +1,5 @@
-# Lexical Analysis Result
-# Generate Time: Sun Nov 26 16:52:15 2017
-# Program File Name: input
-# Language Set: PL/0
+#Éú³ÉÊ±¼ä£ºWed Jan  3 23:30:54 2018
+#Ô´ÎÄ¼þ£ºinput
 
 program RESERVED 1 8
 ttt ID 1 12
@@ -9,10 +7,10 @@ ttt ID 1 12
 const RESERVED 2 10
 er ID 2 13
 ^ := AOP 2 14
-[Lexical ERROR]  [2,14] Missing "=" near the ":"
+[Program ERROR] [2,14] Missing '=' near the ':' ;
 3 INT 2 15
 ^ 55te ID 2 20
-[Lexical ERROR]  [2,20] Invalid ID: "55te"
+[Program ERROR][2, 20] Invalid ID: 55te
 := AOP 2 22
 3 INT 2 23
 tt ID 2 26
@@ -70,4 +68,3 @@ b ID 13 15
 ) SOP 13 16
 ; EOP 13 17
 end RESERVED 14 4
-ÿ UNKNOWN 15 2
