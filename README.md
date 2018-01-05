@@ -3,7 +3,7 @@
 
 ## Lexical_Analysis
 - 实现了进行词法分析的有限自动机。
-##G rammar_Analysis
+## Grammar_Analysis
 - 实现了自顶向下的语法分析器。
 ## PL/0
 - 实现了包括词法分析、语法分析、错误处理、符号表管理、目标代码的生成和解释执行的一系列功能。
